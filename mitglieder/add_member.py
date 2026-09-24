@@ -7,12 +7,14 @@ import functools
 
 DB_NAME = 'memberdb.sqlite'
 
+def umlaut_to_ascii(s):
+    return s.replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
 
 def add_member():
     first_name = input('First name: ')
     last_name = input('Last name: ')
     email = '{0}.{1}@ost.ch'.format(first_name.lower(), last_name.lower())
-    specific_email = input('E-Mail ({0}): '.format(email))
+    specific_email = umlaut_to_ascii(input('E-Mail ({0}): '.format(email)))
     if len(specific_email) > 0:
         email = specific_email
     gender = input('Gender (m/w/n): ')
@@ -48,7 +50,7 @@ def confirm(message):
 
 
 def read_passphrase():
-    return subprocess.run('pass verein/memberdb',
+    return subprocess.run('pass openost/verein/memberdb',
                           shell=True,
                           check=True,
                           stdout=subprocess.PIPE).stdout.decode()[:-1]
