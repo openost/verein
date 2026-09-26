@@ -1,65 +1,10 @@
-#set text(lang: "de", region: "ch")
-#let openost = text(font: "Ubuntu Sans", fill: rgb("#191919"))[open\\OST]
-#set heading(numbering: "1")
-#show heading: it => [
-  § #counter(heading).display() -- #it.body
-]
-#set enum(
-  numbering: (..it) => context if it.pos().len() > 2 [
-    #numbering("i.", ..it.pos().slice(2))
-  ] else [
-    #counter(heading).display().#it.pos().map(x => [#x]).join([.])
-  ],
-  full: true,
-  spacing: 1em,
-)
-#set page(paper: "a4", margin: 30mm)
-#set document(
-  author: "Georgiy Shevoroshkin",
-  date: datetime.today(),
-  title: [Vereinsstatuten #openost],
-)
-#let today = datetime.today().display("[day].[month].[year]")
+#import "../design/typst.typ": colors, logo-w-text, openost, openost-template-official, today, urls
 #let last-change = "28. Juli 2026"
-
-#page[
-  #set align(center)
-
-  #text(size: 1.5em)[*#openost*]
-
-  #text(size: 3em)[*Vereinsstatuten*]
-
-  #v(2em)
-
-  #text(size: 1.5em)[Stand: #today]
-
-  #v(2em)
-
-  #image("logo.png", width: 50%)
-
-  #v(1fr)
-
-  Beschlossen an der GV vom #last-change
-
-  #v(4em)
-  #grid(columns: (1fr, 1fr, 1fr), gutter: 4em, inset: .5em, stroke: (
-      top: .5pt + black,
-    ))[
-    Georgiy Shevoroshkin\ Präsident
-  ][
-    Jasmin Fässler\ Vize-Präsidentin
-  ][
-    Filippo Andretta\ Kassierer
-  ]
-]
-
-#set page(
-  header: [
-    Vereinsstatuten #openost #h(1fr) Stand: #today
-    #v(-.8em)
-    #line(length: 100%, stroke: black + .5pt)
-  ],
-  footer: context align(center)[Seite #counter(page).display() von #(counter(page).final().first())],
+#show: openost-template-official.with(
+  title: [Vereinsstatuten #openost],
+  title-page: true,
+  title-page-content: [Beschlossen an der GV vom #last-change],
+  title-page-title: [Vereinsstatuten],
 )
 
 = Name und Sitz
@@ -90,22 +35,21 @@
   + Juristische Personen stellen einen schriftlichen Antrag an den Vorstand,
     welcher über die Aufnahme entscheidet.
   + Stimm- und wahlberechtigt sind nur diejenigen Mitglieder, die sich im
-    laufenden Vereinsjahr als mitwirkende in einer Arbeitsgruppe mitbeteiligt 
+    laufenden Vereinsjahr als mitwirkende in einer Arbeitsgruppe mitbeteiligt
     haben und in die Liste der Stimm- und wahlberechtigten eingetragen wurden.
 + Austritt von Mitgliedern
-  + Ein Austritt ist jederzeit möglich. 
+  + Ein Austritt ist jederzeit möglich.
   + Der Austritt hat nach einer der folgenden Möglichkeiten zu geschehen:
     + Schriftlich an den Vorstand (per Brief oder E-Mail).
     + Mündlich an einer beschlussfähigen Vorstandssitzung oder einer
       Vereinsversammlung.
-  + Wird nach Studienabschluss während eines vollen Vereinsjahres nicht an 
-    einer Arbeitsgruppe mitgewirkt, erlischt die Mitgliedschaft automatisch, 
-    es sei denn, es wurde vorab mit dem Vorstand anders vereinbart (ggf. 
-    mündlich).
+  + Wird nach Studienabschluss während eines vollen Vereinsjahres nicht an einer
+    Arbeitsgruppe mitgewirkt, erlischt die Mitgliedschaft automatisch, es sei
+    denn, es wurde vorab mit dem Vorstand anders vereinbart (ggf. mündlich).
   + Vom Verein ausgeschlossene oder ausgetretene Mitglieder haben keinen
     Anspruch auf Rückerstattungen jeglicher Art.
   + Beim Austritt aus der OST erlischt die Mitgliedschaft für Mitglieder ohne
-    Vorstandsfunktion automatisch, es sei denn, es wurde vorab mit dem Vorstand 
+    Vorstandsfunktion automatisch, es sei denn, es wurde vorab mit dem Vorstand
     anders vereinbart (ggf. mündlich).
 + Ausschluss von Mitgliedern
   + Mitglieder des Vereins können ausgeschlossen werden, wenn sie dem Zweck des
