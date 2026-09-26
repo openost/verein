@@ -47,7 +47,13 @@
             (pkgs.writeShellScriptBin "sqlite-wrapped" ''
               ${pkgs.lib.getExe pkgs.rlwrap} ${pkgs.lib.getExe pkgs.sqlite} "$@"
             '')
-            # banana-accounting
+            (banana-accounting.overrideAttrs {
+              srcs = fetchurl {
+                url = "https://www.banana.ch/accounting/files/bananaplus/exe/bananaplus.tgz";
+                hash = "sha256-UX4QO+muA4U97V7S7cXHMtTHpEXheJNiirSHXRAOjEM=";
+              };
+            })
+            ledger
           ];
           shellHook = ''
             unset SOURCE_DATE_EPOCH
