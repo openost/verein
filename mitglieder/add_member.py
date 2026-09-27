@@ -28,7 +28,6 @@ def add_member():
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
 
-    # TODO: since
     c.execute('''INSERT INTO members (first_name, last_name, email, gender, github, active, since, newsletter)
               VALUES (?, ?, ?, ?, ?, ?, ?, ?);''', (first_name, last_name, email,
                                               gender, github, 1,

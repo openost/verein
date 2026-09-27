@@ -54,6 +54,7 @@
               };
             })
             ledger
+            python3
           ];
           shellHook = ''
             unset SOURCE_DATE_EPOCH
