@@ -1,8 +1,6 @@
-#import "@preview/payqr-swiss:0.5.0": swiss-qr-bill
-
-#import "../design/typst.typ": (
-  business-page, format-company, logo-w-text, openost, openost-address,
-  openost-template-business, sgkb-address, today, todo, urls,
+#import "../../design/typst.typ": (
+  bill-page, business-page, format-company, logo-w-text, openost, openost-address, openost-template-business,
+  sgkb-address, today, todo, urls,
 )
 
 // TODO: edit this
@@ -61,8 +59,8 @@
 #let selected-option = sponsor-options.at(sponsoring.sla)
 
 #show: openost-template-business.with(
-  title: "Sponsoringvertrag",
-  company: company,
+  company,
+  "Sponsoringvertrag",
 )
 
 Wir freuen uns sehr, euch im neuen Vereinsjahr als Sponsor begrüssen zu dürfen.
@@ -101,9 +99,7 @@ unter #urls.sponsoring entnommen werden.
 == Vereinbarte Leistung
 
 Sponsoring der Kategorie #selected-option.at(0). Damit besteht eine
-Sponsoring-Verpflichtung von CHF #(
-  selected-option.at(1)
-).-.
+Sponsoring-Verpflichtung von CHF #(selected-option.at(1)).-.
 
 == Konditionen
 
@@ -142,73 +138,9 @@ Der Vertrag tritt am #sponsoring.from in Kraft und erlischt am #sponsoring.to.
   )
 }
 
-#pagebreak()
-
-#set page(footer: [])
-#show: business-page.with(title: [Rechnung Sponsoring #openost])
-#let additional-info = (
-  "Sponsoring \""
-    + selected-option.at(0)
-    + "\" "
-    + sponsoring.from
-    + " - "
-    + sponsoring.to
-)
-
-Gemäss der Sponsoringvereinbarung zwischen dem Verein #openost und #company.name
-vom #today erlauben wir uns, den unten genannten Betrag in Rechnung zu stellen.
-
-
-#{
-  show table.cell.where(x: 0): set text(weight: "bold")
-  table(
-    columns: (1fr, 2fr),
-    [Zahlbar bis], [#sponsoring.from (Laufzeitbeginn Sponsoring)],
-    [Betrag (CHF)],
-    [#(
-        selected-option.at(1)
-      ).-],
-
-    [Zahlungsreferenz],
-    [
-      #additional-info
-    ],
-
-    [Empfänger],
-    [
-      IBAN: #openost-address.banking.iban
-
-      #format-company(openost-address, show-name: false, bold-company: false)
-
-      BIC: KBSGCH22
-
-      #format-company(sgkb-address, show-name: false, bold-company: false)
-    ],
-  )
-}
-#place(
-  bottom,
-  dx: -2.5cm,
-  dy: 2.5cm,
-  swiss-qr-bill(
-    account: openost-address.banking.qriban,
-    creditor-name: "open\HSR",
-    creditor-street: openost-address.address.street,
-    creditor-building: openost-address.address.number,
-    creditor-postal-code: openost-address.address.plz,
-    creditor-city: openost-address.address.city,
-    creditor-country: openost-address.address.country,
-    amount: selected-option.at(1),
-    debtor-name: company.contact.name.join(" "),
-    debtor-street: company.address.street,
-    debtor-building: company.address.number,
-    debtor-postal-code: company.address.plz,
-    debtor-city: company.address.city,
-    debtor-country: company.address.country,
-    additional-info: additional-info,
-    currency: "CHF",
-    reference-type: "QRR",
-    // TODO: !!!
-    reference: "220000000000000000000000000",
-  ),
-)
+#bill-page(company, [Rechnung Sponsoring #openost],
+  (:
+  ..sponsoring,
+  name: selected-option.at(0),
+  amount: selected-option.at(1),
+))

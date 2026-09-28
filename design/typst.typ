@@ -1,3 +1,5 @@
+#import "@preview/payqr-swiss:0.5.0": swiss-qr-bill
+
 #let colors = (
   c0: rgb("#D72964"),
   c1: rgb("#8C195F"),
@@ -22,7 +24,8 @@
 )
 
 #let openost = text(font: "Ubuntu Sans", fill: colors.c2)[open\\OST]
-#let today = datetime.today().display("[day].[month].[year]")
+#let dateformat = "[day].[month].[year]"
+#let today = datetime.today().display(dateformat)
 #let todo(it) = {
   box(fill: colors.c0.lighten(50%), inset: 5pt)[
     *TODO:*
@@ -192,9 +195,9 @@
       #v(-.8em)
       #line(length: 100%, stroke: colors.c2 + .5pt)
     ],
-    footer: context align(center)[Seite #counter(page).display() von #(
-        counter(page).final().first()
-      )],
+    footer: context align(
+      center,
+    )[Seite #counter(page).display() von #(counter(page).final().first())],
   )
 
   body
@@ -215,11 +218,14 @@
   ),
 )
 
+// TODO: email
+
 #let openost-address = (
   name: "Verein open\OST",
   contact: (
     gender: "m",
     name: ("Georgiy", "Shevoroshkin"),
+    email: "admin@open-ost.ch",
   ),
   address: (
     name: "OST - Ostschweizer Fachhochschule",
@@ -231,14 +237,14 @@
   ),
   banking: (
     iban: "CH1300781621198572000",
-  qriban: "CH3530781621198572000"
+    qriban: "CH3530781621198572000",
   ),
 )
 
 #let format-address(addr, show-country: false) = [
-  #if "name" in addr {
-    addr.name
-  } \
+  #if "name" in addr [
+    #addr.name \
+  ]
   #addr.street #addr.number \
   #addr.plz #addr.city \
   #if show-country { addr.country }
@@ -246,35 +252,20 @@
 
 #let format-company(company, show-name: true, bold-company: true) = {
   let (name, contact, address) = company
+  if bold-company [ *#name* ] else { name }
+  if show-name {
+    if "name" in contact [\ #contact.name.join([ ])]
+    if "email" in contact [\ #link("mailto:" + contact.email, contact.email) ]
+  }
   [
-    #if bold-company [
-      *#name*
 
-    ] else [ #name \ ] #if show-name { contact.name.join([ ]) }
-    #if bold-company [
-
-
-    ] #format-address(address)
   ]
+  format-address(address)
 }
 
 #let business-page(
-  company: (
-    name: "Firmenname",
-    contact: (
-      gender: "n",
-      name: ("FirstName", "LastName"),
-    ),
-    address: (
-      name: "",
-      street: "Strasse",
-      number: "X",
-      plz: "PLZ",
-      city: "Ort",
-      country: "Land",
-    ),
-  ),
-  title: "Titel",
+  company,
+  title,
   body,
 ) = {
   grid(
@@ -293,18 +284,78 @@
   body
 }
 
+
+#let bill-page(
+  company,
+  title,
+  sponsoring,
+) = {
+  set page(footer: [])
+  show: business-page.with(company, title)
+
+  let additional-info = (
+    "Sponsoring \"" + sponsoring.name + "\" " + sponsoring.from + " - " + sponsoring.to
+  )
+
+  [Gemäss der Sponsoringvereinbarung zwischen dem Verein #openost und #company.name
+    vom #today erlauben wir uns, den unten genannten Betrag in Rechnung zu stellen.]
+
+  show table.cell.where(x: 0): set text(weight: "bold")
+  table(
+    columns: (1fr, 2fr),
+    [Zahlbar bis], [#sponsoring.from],
+    [Betrag (CHF)], [#(sponsoring.amount).-],
+
+    [Zahlungsreferenz],
+    [
+      #additional-info
+    ],
+
+    [Empfänger],
+    [
+      IBAN: #openost-address.banking.iban
+
+      #format-company(openost-address, show-name: false, bold-company: false)
+
+      BIC: KBSGCH22
+
+      #format-company(sgkb-address, show-name: false, bold-company: false)
+    ],
+  )
+
+  place(
+    bottom,
+    dx: -2.5cm,
+    dy: 2.5cm,
+    swiss-qr-bill(
+      account: openost-address.banking.qriban,
+      creditor-name: "open\HSR",
+      creditor-street: openost-address.address.street,
+      creditor-building: openost-address.address.number,
+      creditor-postal-code: openost-address.address.plz,
+      creditor-city: openost-address.address.city,
+      creditor-country: openost-address.address.country,
+      amount: sponsoring.amount,
+      debtor-name: company.contact.name.join(" "),
+      debtor-street: company.address.street,
+      debtor-building: company.address.number,
+      debtor-postal-code: company.address.plz,
+      debtor-city: company.address.city,
+      debtor-country: company.address.country,
+      additional-info: additional-info,
+      currency: "CHF",
+      reference-type: "QRR",
+      // TODO: !!!
+      reference: "220000000000000000000000000",
+    ),
+  )
+}
+
 #let openost-template-business(
-  title: "",
+  company,
+  title,
   author: "open\OST",
   lang: "de",
-  company: (
-    name: "Firmenname",
-    contact: (
-      gender: "n",
-      name: ("FirstName", "LastName"),
-    ),
-    address: ("Strasse X", "PLZ Ort", "Land"),
-  ),
   body,
 ) = {
   show: template-base.with(title: title, author: author, lang: lang)
@@ -339,7 +390,7 @@
       )],
   )
 
-  show: business-page.with(title: title)
+  show: business-page.with(company, title)
 
   [
     Lieb#if company.contact.gender == "n" [e\*r] else if (
