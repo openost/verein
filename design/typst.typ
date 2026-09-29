@@ -232,7 +232,7 @@
     street: "Oberseestrasse",
     number: "10",
     plz: "8640",
-    city: "Rapperswil",
+    city: "Rapperswil-Jona",
     country: "CH",
   ),
   banking: (
@@ -316,8 +316,8 @@
       IBAN: #openost-address.banking.iban
 
       #format-company(openost-address, show-name: false, bold-company: false)
-
-      BIC: KBSGCH22
+      // TODO:
+      // BIC: KBSGCH22
 
       #format-company(sgkb-address, show-name: false, bold-company: false)
     ],
@@ -336,7 +336,8 @@
       creditor-city: openost-address.address.city,
       creditor-country: openost-address.address.country,
       amount: sponsoring.amount,
-      debtor-name: company.contact.name.join(" "),
+      // debtor-name: company.contact.name.join(" "),
+      debtor-name: company.name,
       debtor-street: company.address.street,
       debtor-building: company.address.number,
       debtor-postal-code: company.address.plz,
@@ -345,8 +346,8 @@
       additional-info: additional-info,
       currency: "CHF",
       reference-type: "QRR",
-      // TODO: !!!
-      reference: "220000000000000000000000000",
+      // TODO:
+      // reference: "220000000000000000000000000",
     ),
   )
 }
