@@ -4,15 +4,15 @@ Details zum Sponsoring finden sich auf der [open\OST Webseite unter Sponsoring](
 
 Die Verträge sind mit einem symmetrischen GPG-Passwort verschlüsselt. Das Passwort ist in der ```pass```-Datenbank abgelegt (das gleiche wie für die Buchhaltung).
 
-## Benutzung
+## Benutzung (aus root dir)
 
 ```bash
 # Entschlüsseln
-gpgtar --decrypt ausgestellt.gpg
+gpgtar --decrypt --directory sponsoring/vertrag sponsoring/vertrag/ausgestellt.gpg
 
 # Verschlüsseln
-gpgtar --symmetric --encrypt --output ausgestellt.gpg ausgestellt_1_
+gpgtar --symmetric --encrypt --output sponsoring/vertrag/ausgestellt.gpg sponsoring/vertrag/ausgestellt
 
 # pdfs generieren
-typst watch --root . sponsoring/vertrag/ausgestellt_1_/ausgestellt/sponsoringvertrag_SPONSOR.typ 
+typst watch --root . sponsoring/vertrag/ausgestellt/sponsoringvertrag_SPONSOR.typ 
 ```
