@@ -13,7 +13,7 @@ def umlaut_to_ascii(s):
 def add_member():
     first_name = input('First name: ')
     last_name = input('Last name: ')
-    email = '{0}.{1}@ost.ch'.format(first_name.lower(), last_name.lower())
+    email = '{0}.{1}@ost.ch'.format(umlaut_to_ascii(first_name.lower()), umlaut_to_ascii(last_name.lower()))
     specific_email = umlaut_to_ascii(input('E-Mail ({0}): '.format(email)))
     if len(specific_email) > 0:
         email = specific_email
