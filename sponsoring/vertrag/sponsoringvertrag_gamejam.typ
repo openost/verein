@@ -16,7 +16,7 @@
     "Sponsoringvertrag Game Jam",
   )
 
-  Wir freuen uns sehr, euch im neuen Vereinsjahr als Sponsor begrüssen zu dürfen.
+  Wir freuen uns sehr, euch für dieses Event als Sponsor begrüssen zu dürfen.
 
   Im Anhang findest du unseren Sponsoringvertrag gemäss den Abmachungen per
   E-Mail.
