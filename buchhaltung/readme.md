@@ -7,9 +7,13 @@ Die Buchhaltung kann nach dem entschlüsseln mittels der ledger Software (https:
 ```bash
 # Entschlüsseln
 gpg2 --output buchhaltung_2026-2030.dat --decrypt buchhaltung_2026-2030.dat.gpg
+# Direkt mit pass
+gpg2 --passphrase "$(pass openost/verein/buchhaltung)" --pinentry-mode loopback -o buchhaltung_2026-2030.dat -d buchhaltung_2026-2030.dat.gpg 
 
 # Verschlüsseln
 gpg2 --symmetric buchhaltung_2026-2030.dat
+# Direkt mit pass
+gpg2 --passphrase "$(pass openost/verein/buchhaltung)" --pinentry-mode loopback --symmetric buchhaltung_2026-2030.dat
 ```
 
 
