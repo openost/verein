@@ -8,8 +8,8 @@ Total Stimmenzahl: 16 Stimmen
 
 ## Ort und Zeit
 
-**Ort:** Online(Microsoft Teams)
-**Tag:** 19.10.2020
+**Ort:** Online (Microsoft Teams)\
+**Tag:** 19.10.2020\
 **Zeit:** 17:00 Uhr bis 19.00 Uhr
 
 ## Traktanden
@@ -187,7 +187,7 @@ Weitere Schritte des Vereinen bezüglich dem Studentenportal
 - Beistand wird offen gelassen und die Aufgaben übernimmt der Vorstand bis zur nächsten ausserordentlichen GV die in einem halben Jahr statt finden soll
 - Neuer Beistand soll in einer baldigen ausserordentlichen GV in der Vorstand aufgenommen werden
 
-### 9– Abschluss der GV
+### 9 – Abschluss der GV
 
 Abschluss der GV durch Präsidenten Fabian Germann.
 
