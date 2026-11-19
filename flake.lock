@@ -1,0 +1,48 @@
+{
+  "nodes": {
+    "nele": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789298082,
+        "narHash": "sha256-nKRS007QLcOFAQHTH3Uek/9ebmwkMEZomVliVu3IIhk=",
+        "owner": "raphiz",
+        "repo": "nele",
+        "rev": "8317758a3b4b5305911d273db99e041ed03f3c73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "raphiz",
+        "repo": "nele",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1790390834,
+        "narHash": "sha256-StRyS/lFHtIw/UgJk+xo+HA66mtoWeDUbkJdvf2Byn4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d54020a6ac3211e9f4201631bdf67678818c0cdf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nele": "nele",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

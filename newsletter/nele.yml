@@ -4,9 +4,10 @@ email:
 sender:
     host: asmtp.mail.hostpoint.ch
     ssl: true
+    port: 465
     starttls: false
-    user: info@openhsr.ch
-    sender: '"open\\HSR Newsletter" <info@openhsr.ch>'
+    user: info@open-ost.ch
+    sender: '"open\\OST Newsletter" <info@open-ost.ch>'
 
 source:
     provider: sqlite
@@ -16,5 +17,5 @@ source:
 draft:
     first_name: Maria
     last_name: Muster
-    gener: w
-    email: info@openhsr.ch
+    gender: w
+    email: info@open-ost.ch

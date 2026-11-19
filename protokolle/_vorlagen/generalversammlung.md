@@ -1,4 +1,4 @@
-# Protokoll alt.comp.hsr Generalversammlung 20XX
+# Protokoll openOST Generalversammlung 20XX
 
 ## Anwesend
 

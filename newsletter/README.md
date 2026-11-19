@@ -1,4 +1,4 @@
-# Open\HSR Newsletters
+# Open\OST Newsletters
 
 ## Sending Newsletters
 

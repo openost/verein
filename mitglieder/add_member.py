@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import datetime
 import subprocess
 import os
 import sqlite3
@@ -6,24 +7,31 @@ import functools
 
 DB_NAME = 'memberdb.sqlite'
 
+def umlaut_to_ascii(s):
+    return s.replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
 
 def add_member():
     first_name = input('First name: ')
     last_name = input('Last name: ')
-    email = '{0}.{1}@ost.ch'.format(first_name.lower(), last_name.lower())
-    specific_email = input('E-Mail ({0}): '.format(email))
+    email = '{0}.{1}@ost.ch'.format(umlaut_to_ascii(first_name.lower()), umlaut_to_ascii(last_name.lower()))
+    specific_email = umlaut_to_ascii(input('E-Mail ({0}): '.format(email)))
     if len(specific_email) > 0:
         email = specific_email
-    gender = input('Gender (m/w): ')
+    gender = input('Gender (m/w/n): ')
     github = input('Github User (optional): ')
     github = github or None
+    newsletter = input('Newsletter (Y/n): ')
+    newsletter = 1 if (newsletter or "y").lower() == 'y' else 0
+    today = datetime.date.today()
 
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
-    c.execute('''INSERT INTO members (first_name, last_name, email, gender, github, active)
-              VALUES (?, ?, ?, ?, ?, ?);''', (first_name, last_name, email,
-                                              gender, github, 1))
+
+    c.execute('''INSERT INTO members (first_name, last_name, email, gender, github, active, since, newsletter)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?);''', (first_name, last_name, email,
+                                              gender, github, 1,
+                                              today.strftime("%Y-%m-%d"), newsletter))
     c.execute("SELECT * FROM members WHERE ID = (SELECT MAX(ID)  FROM members);")
     row = c.fetchone()
 
@@ -41,7 +49,7 @@ def confirm(message):
 
 
 def read_passphrase():
-    return subprocess.run('pass verein/memberdb',
+    return subprocess.run('pass openost/verein/memberdb',
                           shell=True,
                           check=True,
                           stdout=subprocess.PIPE).stdout.decode()[:-1]

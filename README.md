@@ -6,7 +6,7 @@ Dieses Vereinshandbuch dokumentiert den Aufbau des Vereins und die Aufgaben des 
 ## E-Mail
 Kommunikation im Namen des Vereins läuft über die E-Mail Adresse mit externen.
 
-Die E-Mail-Adresse läuft über das Webhosting des VSHSR.
+Die E-Mail-Adresse läuft über das Webhosting des VS-OST.
 
 Die Zugangsdaten finden sich im [Pass-Repository](https://github.com/openhsr/pass)
 
@@ -15,12 +15,12 @@ Newsletter werden ca. 1-3 Mal pro Semester an alle Mitglieder des Vereins gesend
 
 ## Snail Mail
 
-Post für den open\HSR wird im Postfach des VSHSR im Gebäude 4 (neben dem Empfang) abgelegt. Das Postfach sollte gelegentlich geleert werden.
+Post für den open\OST wird im Postfach des VS-OST im Gebäude 4 (neben dem Empfang) abgelegt. Das Postfach sollte gelegentlich geleert werden.
 
 Die Vereinsadresse lautet:
 
 ```
-Verein open\HSR
+Verein open\OST
 Oberseestrasse 10
 8640 Rapperswil-Jona
 ```
@@ -48,7 +48,7 @@ Der Kassier und der Präsident werden je als unterschriftsberechtigt für Bankge
 Der Kassier erhält zusätzlich ein E-Banking-Login, welcher direkt an eine persönliche Mobile-Nr. gekoppelt ist.
 
 ```
-open\HSR
+open\OST
 IBAN CH13 0078 1621 1985 7200 0
 St. Galler Kantonalbank
 St. Leonhardstrasse 25
@@ -77,14 +77,14 @@ Die Website läuft auf GitHub Pages und wird via Travis-CI automatisch deployed.
 
 # Checkliste neue Vorstandsmitglieder
 - [ ] Vorstand auf der Website anpassen
-- [ ] Vorstand (@openhsr/vorstand) / Organisations Mitglieder / Admins auf GitHub anpassen
+- [ ] Vorstand (@openost/vorstand) / Organisations Mitglieder / Admins auf GitHub anpassen
 - [ ] Vorstandsmitglieder im Pass-Repository hinzufügen / entfernen
 - [ ] Zugriff auf E-Mail Postfach für neue Vorstandsmitglieder einrichten
-  - [ ] Aktualisieren Zugriffsberechtigunen auf open@hsr.ch
+  - [ ] Aktualisieren Zugriffsberechtigunen auf open@ost.ch
 - [ ] Papierunterlagen (Protokolle, Stickers etc.) übergeben (Präsident)
 - [ ] Bankkonto übergeben (neuer Kassier und Präsident)
   - Benötigt das unterschriebene Protokoll der letzten GV.
 - [ ] Neue Passwörter generieren & Keys updaten
-- [ ] Vereinspostfach beim VSHSR im Gebäude 4 zeigen
+- [ ] Vereinspostfach beim VS-OST im Gebäude 4 zeigen
 - [ ] Evtl. Kontakte/Sponsoren informieren
 - [ ] Evtl. Verträge anpassen

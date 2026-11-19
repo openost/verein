@@ -2,7 +2,24 @@ Die Buchhaltung ist mit einem symmetrischen GPG-Passwort verschlüsselt. Das Pas
 
 ## Benutzung
 
-Die Buchhaltung kann nach dem entschlüsseln mittels der Banana Softwarei (www.banana.ch) geöffnet werden.
+Die Buchhaltung kann nach dem entschlüsseln mittels der ledger Software (https://ledger-cli.org/) geöffnet werden.
+
+```bash
+# Entschlüsseln
+gpg2 --output buchhaltung_2026-2030.dat --decrypt buchhaltung_2026-2030.dat.gpg
+# Direkt mit pass
+gpg2 --passphrase "$(pass openost/verein/buchhaltung)" --pinentry-mode loopback -o buchhaltung_2026-2030.dat -d buchhaltung_2026-2030.dat.gpg 
+
+# Verschlüsseln
+gpg2 --symmetric buchhaltung_2026-2030.dat
+# Direkt mit pass
+gpg2 --passphrase "$(pass openost/verein/buchhaltung)" --pinentry-mode loopback --symmetric buchhaltung_2026-2030.dat
+```
+
+
+## Legacy
+
+Die Buchhaltung kann nach dem entschlüsseln mittels der Banana Software (www.banana.ch) geöffnet werden.
 
 ```bash
 # Entschlüsseln
